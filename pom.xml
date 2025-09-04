@@ -24,7 +24,7 @@
         <module>mybatis-3</module>
         <module>mybatis-main-dir</module>
     </modules>
-
+    
     <dependencyManagement>
         <dependencies>
             <dependency>

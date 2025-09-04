@@ -24,6 +24,7 @@
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
+      <type>jar</type>
     </dependency>
     <!-- H2 数据库依赖 -->
     <dependency>

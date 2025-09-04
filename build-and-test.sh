@@ -4,6 +4,7 @@
 # 使用方法：
 # 1. 修改 MyBatis 源码后运行：./build-and-test.sh
 # 2. 只运行测试：./build-and-test.sh test
+# 3. 源码依赖模式：./build-and-test.sh source
 
 set -e  # 遇到错误立即退出
 
@@ -13,6 +14,19 @@ echo "=================================="
 # 检查参数
 if [ "$1" = "test" ]; then
     echo "📋 只运行测试..."
+    cd mybatis-main-dir
+    mvn test
+    echo "✅ 测试完成！"
+    exit 0
+fi
+
+if [ "$1" = "source" ]; then
+    echo "🔧 源码依赖模式：直接编译整个项目..."
+    echo "💡 这种方式修改 MyBatis 源码后会自动重新编译"
+    mvn clean compile test-compile
+    echo "✅ 源码依赖模式编译完成！"
+    echo ""
+    echo "🧪 运行测试..."
     cd mybatis-main-dir
     mvn test
     echo "✅ 测试完成！"
@@ -36,4 +50,5 @@ echo ""
 echo "💡 提示："
 echo "   - 修改 MyBatis 源码后运行: ./build-and-test.sh"
 echo "   - 只运行测试: ./build-and-test.sh test"
+echo "   - 源码依赖模式: ./build-and-test.sh source"
 echo "   - 运行主程序: cd mybatis-main-dir && mvn exec:java -Dexec.mainClass=\"com.zero.app.App\""
