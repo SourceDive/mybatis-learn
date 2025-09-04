@@ -51,7 +51,10 @@ public class AppTest extends TestCase {
     /**
      * 初始化测试数据库
      */
-    private void initTestDatabase() throws SQLException, IOException {
+    public void initTestDatabase() throws SQLException, IOException, ClassNotFoundException {
+        // 加载 H2 驱动
+        Class.forName("org.h2.Driver");
+        
         Connection conn = DriverManager.getConnection(
             "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE", 
             "sa", 
@@ -59,8 +62,14 @@ public class AppTest extends TestCase {
         );
         
         InputStream inputStream = Resources.getResourceAsStream("schema.sql");
-        String sql = new String(inputStream.readAllBytes());
-        String[] statements = sql.split(";");
+        StringBuilder sql = new StringBuilder();
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            sql.append(new String(buffer, 0, bytesRead));
+        }
+        inputStream.close();
+        String[] statements = sql.toString().split(";");
         
         Statement stmt = conn.createStatement();
         for (String statement : statements) {
@@ -76,7 +85,7 @@ public class AppTest extends TestCase {
     /**
      * 测试 MyBatis 操作
      */
-    private void testMyBatisOperations() throws IOException {
+    public void testMyBatisOperations() throws IOException {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);

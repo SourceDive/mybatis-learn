@@ -34,7 +34,10 @@ public class App {
     /**
      * 初始化 H2 数据库
      */
-    private static void initDatabase() throws SQLException, IOException {
+    private static void initDatabase() throws SQLException, IOException, ClassNotFoundException {
+        // 加载 H2 驱动
+        Class.forName("org.h2.Driver");
+        
         // 连接 H2 数据库
         Connection conn = DriverManager.getConnection(
             "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE", 
