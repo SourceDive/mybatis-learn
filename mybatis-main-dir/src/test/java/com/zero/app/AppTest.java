@@ -85,7 +85,10 @@ public class AppTest extends TestCase {
     /**
      * 测试 MyBatis 操作
      */
-    public void testMyBatisOperations() throws IOException {
+    public void testMyBatisOperations() throws IOException, SQLException, ClassNotFoundException {
+        // 初始化数据库
+        initTestDatabase();
+        
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
