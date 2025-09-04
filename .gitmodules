@@ -1,0 +1,9 @@
+[submodule "mybatis-3"]
+	path = mybatis-3
+	url = https://github.com/ONGOING-Z/mybatis-3.git
+[submodule "parent"]
+	path = parent
+	url = https://github.com/ONGOING-Z/parent.git
+[submodule "spring"]
+	path = spring
+	url = https://github.com/ONGOING-Z/spring.git
