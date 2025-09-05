@@ -1,0 +1,52 @@
+# Spring Boot 配置文件
+
+spring:
+  # 数据源配置
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+    # 连接池配置
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1200000
+  
+  # SQL初始化
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      platform: h2
+
+# MyBatis 配置
+mybatis:
+  # 实体类别名包
+  type-aliases-package: com.zero.app.domain
+  # mapper文件位置（如果使用XML）
+  # mapper-locations: classpath:mapper/*.xml
+  configuration:
+    # 开启驼峰命名转换
+    map-underscore-to-camel-case: true
+    # 开启二级缓存
+    cache-enabled: true
+    # 开启延迟加载
+    lazy-loading-enabled: true
+    # 关闭积极加载
+    aggressive-lazy-loading: false
+    # 设置默认执行器类型
+    default-executor-type: REUSE
+    # 设置超时时间
+    default-statement-timeout: 25
+    # 打印SQL（开发环境）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 日志配置
+logging:
+  level:
+    com.zero.app.dao: DEBUG
+    org.springframework.jdbc: DEBUG
+    org.mybatis: DEBUG
