@@ -16,6 +16,7 @@
     </environments>
     
     <mappers>
-        <mapper class="com.zero.app.dao.UserDao"/>
+        <mapper class="com.zero.app.UserMapper"/>
     </mappers>
 </configuration>
+

@@ -24,7 +24,9 @@
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <type>jar</type>
+      <version>3.5.4-my-debug-snapshot</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/../mybatis-3/target/mybatis-3.5.4-my-debug-snapshot.jar</systemPath>
     </dependency>
     <!-- H2 数据库依赖 -->
     <dependency>
