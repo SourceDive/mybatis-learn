@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 全局配置设置 -->
+    <settings>
+        <!-- 开启二级缓存 -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 开启延迟加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 积极加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 开启驼峰命名转换 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 打印SQL日志 -->
+        <setting name="logImpl" value="JDK_LOGGING"/>
+        <!-- 设置默认的执行器类型 -->
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <!-- 设置超时时间 -->
+        <setting name="defaultStatementTimeout" value="25"/>
+    </settings>
+    
+    <!-- 类型别名 -->
+    <typeAliases>
+        <package name="com.zero.app.domain"/>
+    </typeAliases>
+    
+    <!-- 插件配置（可以添加分页插件等） -->
+    <plugins>
+        <!-- 示例：性能分析插件 -->
+        <plugin interceptor="com.zero.app.plugin.PerformanceInterceptor">
+            <property name="slowSqlMillis" value="1000"/>
+        </plugin>
+    </plugins>
+    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="org.h2.Driver"/>
+                <property name="url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
+                <property name="username" value="sa"/>
+                <property name="password" value=""/>
+                <!-- 连接池配置 -->
+                <property name="poolMaximumActiveConnections" value="10"/>
+                <property name="poolMaximumIdleConnections" value="5"/>
+                <property name="poolMaximumCheckoutTime" value="20000"/>
+                <property name="poolTimeToWait" value="20000"/>
+            </dataSource>
+        </environment>
+        
+        <!-- 测试环境配置 -->
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="org.h2.Driver"/>
+                <property name="url" value="jdbc:h2:mem:testdb_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
+                <property name="username" value="sa"/>
+                <property name="password" value=""/>
+            </dataSource>
+        </environment>
+    </environments>
+    
+    <mappers>
+        <mapper class="com.zero.app.dao.UserDao"/>
+        <!-- 可以使用包扫描 -->
+        <!-- <package name="com.zero.app.dao"/> -->
+    </mappers>
+</configuration>
