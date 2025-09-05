@@ -1,5 +1,7 @@
 package com.zero.app;
 
+import com.zero.app.dao.UserDao;
+import com.zero.app.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,7 +18,7 @@ import java.util.List;
 /**
  * MyBatis 最小测试程序
  */
-public class App {
+public class Application {
     
     public static void main(String[] args) {
         try {
@@ -80,26 +82,26 @@ public class App {
         // 获取 SqlSession
         try (SqlSession session = sqlSessionFactory.openSession()) {
             // 获取 Mapper
-            UserMapper userMapper = session.getMapper(UserMapper.class);
+            UserDao userDao = session.getMapper(UserDao.class);
             
             System.out.println("=== MyBatis 测试开始 ===");
             
             // 1. 查询所有用户
             System.out.println("\n1. 查询所有用户：");
-            List<User> users = userMapper.selectAll();
+            List<User> users = userDao.selectAll();
             for (User user : users) {
                 System.out.println(user);
             }
             
             // 2. 根据 ID 查询用户
             System.out.println("\n2. 根据 ID 查询用户：");
-            User user = userMapper.selectById(1L);
+            User user = userDao.selectById(1L);
             System.out.println("ID为1的用户：" + user);
             
             // 3. 插入新用户
             System.out.println("\n3. 插入新用户：");
             User newUser = new User("赵六", "zhaoliu@example.com");
-            int insertResult = userMapper.insert(newUser);
+            int insertResult = userDao.insert(newUser);
             session.commit(); // 提交事务
             System.out.println("插入结果：" + insertResult + "，新用户ID：" + newUser.getId());
             
@@ -107,26 +109,26 @@ public class App {
             System.out.println("\n4. 更新用户：");
             newUser.setName("赵六（已更新）");
             newUser.setEmail("zhaoliu_updated@example.com");
-            int updateResult = userMapper.update(newUser);
+            int updateResult = userDao.update(newUser);
             session.commit(); // 提交事务
             System.out.println("更新结果：" + updateResult);
             
             // 5. 再次查询所有用户
             System.out.println("\n5. 更新后的所有用户：");
-            users = userMapper.selectAll();
+            users = userDao.selectAll();
             for (User u : users) {
                 System.out.println(u);
             }
             
             // 6. 删除用户
             System.out.println("\n6. 删除用户：");
-            int deleteResult = userMapper.deleteById(newUser.getId());
+            int deleteResult = userDao.deleteById(newUser.getId());
             session.commit(); // 提交事务
             System.out.println("删除结果：" + deleteResult);
             
             // 7. 最终查询所有用户
             System.out.println("\n7. 删除后的所有用户：");
-            users = userMapper.selectAll();
+            users = userDao.selectAll();
             for (User u : users) {
                 System.out.println(u);
             }

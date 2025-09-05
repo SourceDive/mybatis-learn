@@ -1,4 +1,4 @@
-package com.zero.app;
+package com.zero.app.domain;
 
 /**
  * 用户实体类

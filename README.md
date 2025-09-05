@@ -75,7 +75,7 @@ mybatis-learn/
 ```bash
 # 运行主程序
 cd mybatis-main-dir
-mvn exec:java -Dexec.mainClass="com.zero.app.App"
+mvn exec:java -Dexec.mainClass="com.zero.app.Application"
 
 # 运行单元测试
 cd mybatis-main-dir

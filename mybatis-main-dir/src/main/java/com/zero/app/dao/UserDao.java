@@ -1,5 +1,6 @@
-package com.zero.app;
+package com.zero.app.dao;
 
+import com.zero.app.domain.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * 用户数据访问接口
  */
-public interface UserMapper {
+public interface UserDao {
     
     @Insert("INSERT INTO users(name, email) VALUES(#{name}, #{email})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
