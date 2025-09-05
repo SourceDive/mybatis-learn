@@ -29,7 +29,7 @@
     <!-- 插件配置（可以添加分页插件等） -->
     <plugins>
         <!-- 示例：性能分析插件 -->
-        <plugin interceptor="com.zero.app.plugin.PerformanceInterceptor">
+        <plugin interceptor="com.zero.app.interceptor.PerformanceInterceptor">
             <property name="slowSqlMillis" value="1000"/>
         </plugin>
     </plugins>

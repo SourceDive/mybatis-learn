@@ -1,4 +1,4 @@
-package com.zero.app.plugin;
+package com.zero.app.interceptor;
 
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;

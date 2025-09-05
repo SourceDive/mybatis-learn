@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * MyBatis 测试工具类
+ * MyBatis 测试工具类:
  * 提供更优雅的会话管理和事务处理
  */
 public class MyBatisTestUtil {
