@@ -1,0 +1,91 @@
+name: 代码质量检查
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  checkstyle:
+    name: Checkstyle 代码规范检查
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+    
+    - name: 设置 JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: 运行 Checkstyle
+      run: |
+        cd mybatis-main-dir
+        ./mvnw checkstyle:check || true
+    
+    - name: 上传 Checkstyle 报告
+      uses: jwgmeligmeyling/checkstyle-github-action@master
+      if: always()
+      with:
+        path: '**/checkstyle-result.xml'
+  
+  spotbugs:
+    name: SpotBugs 静态分析
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+    
+    - name: 设置 JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: 编译项目
+      run: |
+        cd mybatis-main-dir
+        ./mvnw clean compile
+    
+    - name: 运行 SpotBugs
+      run: |
+        cd mybatis-main-dir
+        ./mvnw com.github.spotbugs:spotbugs-maven-plugin:check || true
+    
+    - name: 上传 SpotBugs 报告
+      uses: jwgmeligmeyling/spotbugs-github-action@master
+      if: always()
+      with:
+        path: '**/spotbugsXml.xml'
+  
+  pmd:
+    name: PMD 代码分析
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+    
+    - name: 设置 JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+    
+    - name: 运行 PMD
+      run: |
+        cd mybatis-main-dir
+        ./mvnw pmd:check || true
+    
+    - name: 上传 PMD 报告
+      uses: jwgmeligmeyling/pmd-github-action@master
+      if: always()
+      with:
+        path: '**/pmd.xml'
