@@ -1,5 +1,7 @@
 package com.zero.app;
 
+import com.zero.app.dao.UserDao;
+import com.zero.app.domain.User;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -94,32 +96,32 @@ public class AppTest extends TestCase {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            UserMapper userMapper = session.getMapper(UserMapper.class);
+            UserDao userDao = session.getMapper(UserDao.class);
             
             // 测试查询所有用户
-            List<User> users = userMapper.selectAll();
+            List<User> users = userDao.selectAll();
             assertTrue("应该至少有3个初始用户", users.size() >= 3);
             
             // 测试根据ID查询
-            User user = userMapper.selectById(1L);
+            User user = userDao.selectById(1L);
             assertNotNull("应该能找到ID为1的用户", user);
             assertEquals("用户ID应该为1", Long.valueOf(1L), user.getId());
             
             // 测试插入用户
             User newUser = new User("测试用户", "test@example.com");
-            int insertResult = userMapper.insert(newUser);
+            int insertResult = userDao.insert(newUser);
             session.commit();
             assertEquals("插入应该成功", 1, insertResult);
             assertNotNull("新用户应该有ID", newUser.getId());
             
             // 测试更新用户
             newUser.setName("测试用户（已更新）");
-            int updateResult = userMapper.update(newUser);
+            int updateResult = userDao.update(newUser);
             session.commit();
             assertEquals("更新应该成功", 1, updateResult);
             
             // 测试删除用户
-            int deleteResult = userMapper.deleteById(newUser.getId());
+            int deleteResult = userDao.deleteById(newUser.getId());
             session.commit();
             assertEquals("删除应该成功", 1, deleteResult);
             

@@ -196,14 +196,14 @@ mvn dependency:tree
 </dependency>
 ```
 
-### 问题 2：`Type interface com.zero.app.UserMapper is not known to the MapperRegistry`
+### 问题 2：`Type interface com.zero.app.dao.UserDao is not known to the MapperRegistry`
 
 **原因**：MyBatis 配置文件中 Mapper 类名错误
 
 **解决**：
 ```xml
 <mappers>
-    <mapper class="com.zero.app.UserMapper"/>  <!-- 正确的类名 -->
+    <mapper class="com.zero.app.dao.UserDao"/>  <!-- 正确的类名 -->
 </mappers>
 ```
 
