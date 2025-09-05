@@ -1,0 +1,74 @@
+# Cursor Rules for MyBatis Learning Project
+
+## Git 提交规范
+
+### 永远不要提交的文件
+- `target/` 目录及其所有内容（Maven/Gradle 构建输出）
+- `*.class` 文件（Java 编译输出）
+- `.idea/` 目录（IntelliJ IDEA 配置）
+- `*.iml` 文件（IntelliJ IDEA 模块文件）
+- `.DS_Store`（macOS 系统文件）
+- `Thumbs.db`（Windows 系统文件）
+- 临时下载的文件（如 `apache-maven-*.tar.gz`）
+- 临时解压的目录（如 `apache-maven-*/`）
+
+### 可以提交的文件
+- 源代码文件（`*.java`, `*.xml`, `*.properties`, `*.yml`）
+- 项目配置文件（`pom.xml`, `build.gradle`）
+- Maven Wrapper 文件（`.mvn/`, `mvnw`, `mvnw.cmd`）- 这些帮助其他开发者构建项目
+- 文档文件（`README.md`, `*.md`）
+- `.gitignore` 文件
+
+## Maven 项目最佳实践
+
+### 资源文件处理
+1. 资源文件应放在 `src/main/resources` 目录
+2. 确保 `pom.xml` 中配置了资源插件，自动复制资源到 `target/classes`
+3. 不要手动复制文件到 `target` 目录
+
+### 构建配置示例
+```xml
+<build>
+  <resources>
+    <resource>
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>**/*.xml</include>
+        <include>**/*.yml</include>
+        <include>**/*.properties</include>
+        <include>**/*.sql</include>
+      </includes>
+    </resource>
+  </resources>
+</build>
+```
+
+## 问题解决流程
+
+### 遇到 "Could not find resource" 错误时
+1. 检查资源文件是否在 `src/main/resources` 目录
+2. 检查 `target/classes` 目录是否包含资源文件
+3. 如果没有，检查 Maven 资源插件配置
+4. 使用 `mvn clean compile` 重新构建
+
+### 依赖问题处理
+1. 优先使用 Maven 中央仓库的标准版本
+2. 避免使用自定义的 SNAPSHOT 版本（除非确实需要）
+3. 如果项目依赖本地模块，确保先构建依赖模块
+
+## 代码助手行为准则
+
+### 文件操作
+- 在修改项目配置前，先理解项目结构
+- 不要在工作区根目录下载和解压大型文件
+- 使用项目自带的构建工具（Maven Wrapper、Gradle Wrapper）
+
+### Git 操作
+- 提交前使用 `git status` 检查将要提交的文件
+- 使用 `git ls-files | grep pattern` 检查已跟踪的文件
+- 发现错误提交的文件时，使用 `git rm` 移除
+
+### 调试和测试
+- 编译错误时，可以选择性编译需要的文件，避免编译有问题的类
+- 运行时明确指定 classpath，包含所有必要的依赖
+- 提供清晰的错误解决步骤和解释
