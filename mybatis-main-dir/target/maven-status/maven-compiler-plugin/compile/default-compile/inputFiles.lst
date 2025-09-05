@@ -4,5 +4,4 @@
 /workspace/mybatis-main-dir/src/main/java/com/zero/app/Application.java
 /workspace/mybatis-main-dir/src/main/java/com/zero/app/service/UserService.java
 /workspace/mybatis-main-dir/src/main/java/com/zero/app/plugin/PerformanceInterceptor.java
-/workspace/mybatis-main-dir/src/main/java/com/zero/app/SpringBootApplication.java
 /workspace/mybatis-main-dir/src/main/java/com/zero/app/domain/User.java
