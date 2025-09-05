@@ -16,12 +16,11 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mybatis.version>3.5.4-my-debug-snapshot</mybatis.version>
+        <mybatis.version>3.5.4</mybatis.version>
         <h2.version>1.4.200</h2.version>
     </properties>
 
     <modules>
-        <module>mybatis-3</module>
         <module>mybatis-main-dir</module>
     </modules>
     

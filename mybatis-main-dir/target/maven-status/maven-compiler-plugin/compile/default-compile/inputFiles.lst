@@ -1,3 +1,8 @@
-/Users/zero/Documents/03_学习/02_技术学习/github/back_end/java/01_my_projects/framework/mybatis-learn/mybatis-main-dir/src/main/java/com/zero/app/UserMapper.java
-/Users/zero/Documents/03_学习/02_技术学习/github/back_end/java/01_my_projects/framework/mybatis-learn/mybatis-main-dir/src/main/java/com/zero/app/User.java
-/Users/zero/Documents/03_学习/02_技术学习/github/back_end/java/01_my_projects/framework/mybatis-learn/mybatis-main-dir/src/main/java/com/zero/app/App.java
+/workspace/mybatis-main-dir/src/main/java/com/zero/app/AdvancedApplication.java
+/workspace/mybatis-main-dir/src/main/java/com/zero/app/dao/UserDao.java
+/workspace/mybatis-main-dir/src/main/java/com/zero/app/util/MyBatisTestUtil.java
+/workspace/mybatis-main-dir/src/main/java/com/zero/app/Application.java
+/workspace/mybatis-main-dir/src/main/java/com/zero/app/service/UserService.java
+/workspace/mybatis-main-dir/src/main/java/com/zero/app/plugin/PerformanceInterceptor.java
+/workspace/mybatis-main-dir/src/main/java/com/zero/app/SpringBootApplication.java
+/workspace/mybatis-main-dir/src/main/java/com/zero/app/domain/User.java
