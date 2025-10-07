@@ -29,14 +29,13 @@
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>3.5.4-my-debug-snapshot</version>
+      <!-- 版本号由父 POM 的 dependencyManagement 管理，使用源码模块产物 -->
     </dependency>
     
-    <!-- 直接使用本地 MyBatis-Spring 源码 -->
+    <!-- 使用 Reactor 中的 mybatis-spring 源码模块（版本由父 POM 管理为 2.1.2） -->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
-      <version>3.0.0</version>
     </dependency>
     
     <!-- H2 数据库依赖 -->
@@ -74,17 +73,24 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>5.3.23</version>
+      <version>5.3.31</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>5.3.23</version>
+      <version>5.3.31</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>5.3.23</version>
+      <version>5.3.31</version>
+    </dependency>
+
+    <!-- 锁定 spring-aop 到 5.3.x，避免引入 6.x（需要 Java 17） -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      <version>5.3.31</version>
     </dependency>
 
     <!-- Lombok - 简化实体类/样板代码 -->
