@@ -27,13 +27,16 @@ public class MyConfig {
 
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-        SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource);
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource);
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.zero.mydebug.spring.domain"); // 设置实体类别名包
+        sqlSessionFactoryBean.setConfiguration(getConfiguration());
 
-        // 设置实体类别名包
-        sessionFactory.setTypeAliasesPackage("com.zero.mydebug.spring.domain");
+        return sqlSessionFactoryBean.getObject();
+    }
 
-        // 配置 MyBatis 设置
+    // 配置 MyBatis 设置
+    private static org.apache.ibatis.session.Configuration getConfiguration() {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
         configuration.setCacheEnabled(true);
@@ -42,9 +45,6 @@ public class MyConfig {
         configuration.setDefaultExecutorType(org.apache.ibatis.session.ExecutorType.REUSE);
         configuration.setDefaultStatementTimeout(25);
         configuration.setLogImpl(org.apache.ibatis.logging.stdout.StdOutImpl.class);
-
-        sessionFactory.setConfiguration(configuration);
-
-        return sessionFactory.getObject();
+        return configuration;
     }
 }
