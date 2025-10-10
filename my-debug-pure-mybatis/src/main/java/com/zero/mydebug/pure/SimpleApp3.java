@@ -1,6 +1,7 @@
 package com.zero.mydebug.pure;
 
 import com.zero.mydebug.pure.dao.UserDao;
+import com.zero.mydebug.pure.dao.UserDao2;
 import com.zero.mydebug.pure.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -16,9 +17,9 @@ import java.sql.Statement;
 import java.util.List;
 
 /**
- * MyBatis 最小测试程序
+ * MyBatis 测试二级缓存。
  */
-public class SimpleApp {
+public class SimpleApp3 {
     
     public static void main(String[] args) {
         try {
@@ -79,24 +80,28 @@ public class SimpleApp {
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         
-        // 获取 SqlSession
-        try (SqlSession session = sqlSessionFactory.openSession()) {
-            // 获取 Mapper
-            UserDao userDao = session.getMapper(UserDao.class);
-            
-            System.out.println("=== MyBatis 测试开始 ===");
-            
-//            // 1. 查询所有用户
-            System.out.println("\n1. 查询所有用户：");
-            List<User> users = userDao.selectAll();
-            for (User user : users) {
-                System.out.println(user);
+        System.out.println("=== MyBatis 二级缓存测试开始 ===");
+        
+        // 第一次查询 - 使用第一个 SqlSession
+        System.out.println("\n1. 第一次查询（第一个 SqlSession）：");
+        try (SqlSession session1 = sqlSessionFactory.openSession()) {
+            UserDao2 userDao1 = session1.getMapper(UserDao2.class);
+            List<User> users1 = userDao1.selectAll();
+            for (User user : users1) {
+                System.out.println("第一次查询结果：" + user);
             }
-            // 再次查询
-            List<User> users2 = userDao.selectAll();
+            // 关闭第一个 SqlSession，这样二级缓存才会生效
+        }
+        
+        // 第二次查询 - 使用第二个 SqlSession（应该从二级缓存获取）
+        System.out.println("\n2. 第二次查询（第二个 SqlSession，应该从二级缓存获取）：");
+        try (SqlSession session2 = sqlSessionFactory.openSession()) {
+            UserDao2 userDao2 = session2.getMapper(UserDao2.class);
+            List<User> users2 = userDao2.selectAll();
             for (User user : users2) {
-                System.out.println(user);
+                System.out.println("第二次查询结果：" + user);
             }
+        }
 
 //            // 2. 根据 ID 查询用户
 //            System.out.println("\n2. 根据 ID 查询用户：");

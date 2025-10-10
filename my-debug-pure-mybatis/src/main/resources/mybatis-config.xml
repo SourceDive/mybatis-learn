@@ -28,6 +28,7 @@
     
     <mappers>
         <mapper class="com.zero.mydebug.pure.dao.UserDao"/>
+        <mapper class="com.zero.mydebug.pure.dao.UserDao2"/>
     </mappers>
 </configuration>
 
