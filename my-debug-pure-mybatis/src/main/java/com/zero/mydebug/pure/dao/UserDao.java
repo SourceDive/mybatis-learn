@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
+ * 测试一级缓存。
  * 用户数据访问接口
  */
 public interface UserDao {

@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * MyBatis 最小测试程序
  */
-public class SimpleApp {
+public class Level1CacheApp {
     
     public static void main(String[] args) {
         try {

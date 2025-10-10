@@ -1,9 +1,6 @@
 package com.zero.mydebug.pure;
 
-import com.zero.mydebug.pure.dao.UserDao;
-import com.zero.mydebug.pure.domain.User;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.session.SqlSessionManager;
@@ -18,7 +15,7 @@ import java.sql.Statement;
 /**
  * MyBatis 最小测试程序
  */
-public class SimpleApp2 {
+public class Level1CacheApp2 {
     
     public static void main(String[] args) {
         try {

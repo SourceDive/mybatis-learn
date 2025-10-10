@@ -2,20 +2,20 @@ package com.zero.mydebug.pure.dao;
 
 import com.zero.mydebug.pure.domain.User;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.cache.decorators.LruCache;
 import org.apache.ibatis.cache.impl.PerpetualCache;
 
 import java.util.List;
 
 /**
+ * 测试二级缓存。
  * 用户数据访问接口
  */
 @CacheNamespace(
         implementation = PerpetualCache.class,
-        eviction = LruCache.class,
         flushInterval = 60000,
         size = 1024,
-        readWrite = true
+        readWrite = true,
+        blocking = false
 )
 public interface UserDao2 {
 
